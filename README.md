@@ -1,2 +1,37 @@
-# scripts
-Some personal scripts, mostly Python and shell.
+# 项目简介
+
+该项目包含了一系列 Python 脚本，每个脚本都用来完成特定的任务。下面是每个脚本的简要介绍：
+
+## 文件列表
+
+| 文件名             | 简介                                                 |
+| ------------------ | ---------------------------------------------------- |
+| 01hello.py         | 用来打印“Hello, World!”消息的简单脚本。              |
+| 02ccc.py           | 计算圆的周长和面积的脚本。                           |
+| 03data_analysis.py | 用来进行基础数据分析的脚本，包括数据清洗和统计计算。 |
+| 04web_scraper.py   | 用来从网页抓取数据的脚本。                           |
+
+## 使用说明
+
+1. 确保已经安装了 Python 3.x 版本。
+2. 克隆或下载该项目的代码到本地。
+3. 根据需要运行对应的脚本。例如，运行`01hello.py`：
+   ```sh
+   python 01hello.py
+   ```
+
+## 依赖项
+
+部分脚本可能需要额外的 Python 库。请参考每个脚本的开头部分，那里通常会有关于依赖项的说明。例如，`04web_scraper.py`可能需要`requests`和`beautifulsoup4`库：
+
+```sh
+pip install requests beautifulsoup4
+```
+
+## 贡献
+
+如果你有任何改进或新的功能想要添加，欢迎提交 Pull Request。同时，你也可以在 Issues 部分提出问题和建议。
+
+## 许可证
+
+该项目遵循 MIT 许可证。详细信息请参阅 LICENSE 文件。
