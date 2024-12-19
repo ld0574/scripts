@@ -4,28 +4,28 @@
 
 ## 文件列表
 
-| 文件名             | 简介                                                 |
-| ------------------ | ---------------------------------------------------- |
-| 01hello.py         | 用来打印“Hello, World!”消息的简单脚本。              |
-| 02ccc.py           | 计算圆的周长和面积的脚本。                           |
-| 03data_analysis.py | 用来进行基础数据分析的脚本，包括数据清洗和统计计算。 |
-| 04web_scraper.py   | 用来从网页抓取数据的脚本。                           |
+| 文件名              | 简介                                  |
+| ------------------- | ------------------------------------- |
+| 01video_classify.py | 用来分类视频的脚本。                  |
+| 02mp3_split.py      | 用来将 MP3 文件分割成多个部分的脚本。 |
+| 03transcription.py  | 用来进行语音识别文字的脚本。          |
 
 ## 使用说明
 
 1. 确保已经安装了 Python 3.x 版本。
 2. 克隆或下载该项目的代码到本地。
-3. 根据需要运行对应的脚本。例如，运行`01hello.py`：
+3. 更新配置文件，重命名.env.example 为.env，根据实际情况修改配置
+4. 根据需要运行对应的脚本。例如，运行`01video_classify.py`：
    ```sh
-   python 01hello.py
+   python 01video_classify.py
    ```
 
 ## 依赖项
 
-部分脚本可能需要额外的 Python 库。请参考每个脚本的开头部分，那里通常会有关于依赖项的说明。例如，`04web_scraper.py`可能需要`requests`和`beautifulsoup4`库：
+部分脚本可能需要额外的 Python 库。请参考每个脚本的开头部分，那里通常会有关于依赖项的说明。例如，`02mp3_split.py`可能需要`pydub`和`audioop-lts`库：
 
 ```sh
-pip install requests beautifulsoup4
+pip install requests audioop-lts
 ```
 
 ## 贡献
