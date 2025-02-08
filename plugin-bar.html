@@ -1,0 +1,263 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Year ProcessBar</title>
+    <style type="text/css">
+      body {
+        font-family: "Acme", sans-serif;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .progress-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .progress {
+        display: flex;
+        align-items: center;
+        width: 370px;
+        height: 25px;
+        background-color: #adadad;
+        border-radius: 5px;
+        position: relative;
+      }
+      .progress-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px 0px 0px 5px;
+        background-color: #f8e231;
+        height: 25px;
+        background-image: linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0.15) 25%,
+          transparent 25%,
+          transparent 50%,
+          rgba(255, 255, 255, 0.15) 50%,
+          rgba(255, 255, 255, 0.15) 75%,
+          transparent 75%,
+          transparent
+        );
+        background-size: 1rem 1rem;
+        animation-duration: 5s;
+        animation-timing-function: linear;
+        animation-delay: 0s;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+        animation-fill-mode: none;
+        animation-play-state: running;
+        animation-name: progress-bar-stripes;
+      }
+      .progress-container .value {
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        font-weight: bold;
+      }
+      .current-date {
+        margin-top: 0px;
+        margin-bottom: 15px;
+      }
+      .alert {
+        display: none;
+        margin-bottom: 0px;
+      }
+      .text {
+        margin-top: 40px;
+      }
+      .footer {
+        font-size: 15px;
+        align-items: center;
+        display: flex;
+        color: #808080;
+      }
+      .footer .github {
+        fill: #808080;
+      }
+      .footer span {
+        margin-left: 5px;
+      }
+      @-webkit-keyframes progress-bar-stripes {
+        from {
+          background-position: 100px 0;
+        }
+        to {
+          background-position: 0 0;
+        }
+      }
+      @keyframes progress-bar-stripes {
+        from {
+          background-position: 40px 0;
+        }
+        to {
+          background-position: 0 0;
+        }
+      }
+      @media (max-width: 420px) {
+        .progress {
+          width: 300px;
+        }
+      }
+      @media (max-width: 200px) {
+        .progress {
+          width: 150px;
+        }
+      }
+      .progress-label {
+        width: 40px;
+      }
+      .progress-item {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="progress-container">
+        <div class="progress-item">
+          <div class="progress-label">年份</div>
+          <div class="progress">
+            <div class="progress-bar year-bar"></div>
+            <div class="value year-value"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <div class="progress-label">季度</div>
+          <div class="progress">
+            <div class="progress-bar quarter-bar"></div>
+            <div class="value quarter-value"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <div class="progress-label">月份</div>
+          <div class="progress">
+            <div class="progress-bar month-bar"></div>
+            <div class="value month-value"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <div class="progress-label">星期</div>
+          <div class="progress">
+            <div class="progress-bar week-bar"></div>
+            <div class="value week-value"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function getCurrentProgress() {
+        const currentDate = new Date();
+
+        // Year progress
+        const firstDateOfYear = new Date(currentDate.getFullYear(), 0, 1);
+        const daysSinceStartOfYear =
+          (currentDate - firstDateOfYear) / (1000 * 60 * 60 * 24);
+        const isLeapYear =
+          (currentDate.getFullYear() % 4 === 0 &&
+            currentDate.getFullYear() % 100 !== 0) ||
+          currentDate.getFullYear() % 400 === 0;
+        const totalDays = isLeapYear ? 366 : 365;
+        const yearProgress = ((daysSinceStartOfYear * 100) / totalDays).toFixed(
+          6
+        );
+
+        // Quarter progress
+        const currentMonth = currentDate.getMonth();
+        const quarter = Math.floor(currentMonth / 3);
+        const firstDateOfQuarter = new Date(
+          currentDate.getFullYear(),
+          quarter * 3,
+          1
+        );
+        const daysSinceStartOfQuarter =
+          (currentDate - firstDateOfQuarter) / (1000 * 60 * 60 * 24);
+        const daysInQuarter =
+          quarter === 3 ? (currentDate.getFullYear() % 4 === 0 ? 92 : 91) : 91;
+        const quarterProgress = (
+          (daysSinceStartOfQuarter * 100) /
+          daysInQuarter
+        ).toFixed(6);
+
+        // Month progress
+        const firstDateOfMonth = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          1
+        );
+        const daysSinceStartOfMonth =
+          (currentDate - firstDateOfMonth) / (1000 * 60 * 60 * 24);
+        const daysInMonth = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth() + 1,
+          0
+        ).getDate();
+        const monthProgress = (
+          (daysSinceStartOfMonth * 100) /
+          daysInMonth
+        ).toFixed(6);
+
+        // Week progress
+        const firstDateOfWeek = new Date(
+          currentDate.getFullYear(),
+          currentDate.getMonth(),
+          currentDate.getDate() - currentDate.getDay()
+        );
+        const daysSinceStartOfWeek =
+          (currentDate - firstDateOfWeek) / (1000 * 60 * 60 * 24);
+        const weekProgress = ((daysSinceStartOfWeek * 100) / 7).toFixed(6);
+
+        return {
+          year: yearProgress,
+          quarter: quarterProgress,
+          month: monthProgress,
+          week: weekProgress,
+        };
+      }
+
+      function updateUI() {
+        const progress = getCurrentProgress();
+
+        // Update Year progress
+        const yearBar = document.getElementsByClassName("year-bar")[0];
+        yearBar.style.width = `${progress.year}%`;
+        const yearValue = document.getElementsByClassName("year-value")[0];
+        yearValue.textContent = `${progress.year}%`;
+
+        // Update Quarter progress
+        const quarterBar = document.getElementsByClassName("quarter-bar")[0];
+        quarterBar.style.width = `${progress.quarter}%`;
+        const quarterValue =
+          document.getElementsByClassName("quarter-value")[0];
+        quarterValue.textContent = `${progress.quarter}%`;
+
+        // Update Month progress
+        const monthBar = document.getElementsByClassName("month-bar")[0];
+        monthBar.style.width = `${progress.month}%`;
+        const monthValue = document.getElementsByClassName("month-value")[0];
+        monthValue.textContent = `${progress.month}%`;
+
+        // Update Week progress
+        const weekBar = document.getElementsByClassName("week-bar")[0];
+        weekBar.style.width = `${progress.week}%`;
+        const weekValue = document.getElementsByClassName("week-value")[0];
+        weekValue.textContent = `${progress.week}%`;
+      }
+
+      setInterval(updateUI, 1000);
+    </script>
+  </body>
+</html>

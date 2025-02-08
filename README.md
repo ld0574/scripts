@@ -9,6 +9,7 @@
 | 01video_classify.py | 用来分类视频的脚本。                  |
 | 02mp3_split.py      | 用来将 MP3 文件分割成多个部分的脚本。 |
 | 03transcription.py  | 用来进行语音识别文字的脚本。          |
+| plugin-bar.html     | notion 时间进度插件。                 |
 
 ## 使用说明
 
